@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Sklad"
         mc:Ignorable="d"
         Title="Přidat položku" Height="450" Width="800">
-    <Grid Margin="10">
+    <Grid x:Name="myGrid" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
