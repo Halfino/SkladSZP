@@ -1,5 +1,7 @@
 ﻿using System.Data;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using Microsoft.Data.Sqlite;
 using Sklad.Data;
 using Sklad.Models;
@@ -66,26 +68,30 @@ namespace Sklad
 
         private void EditItemButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SparePartsGrid.SelectedItem is Item selectedItem)
+            Item selectedItem = null;
+
+            // Zkontrolujeme, zda je vybraná položka v SparePartsGrid (levý grid - ND)
+            if (SparePartsGrid.SelectedItem is Item sparePartItem)
             {
+                selectedItem = sparePartItem;
+            }
+            // Zkontrolujeme, zda je vybraná položka v ConsumablesGrid (pravý grid - Material)
+            else if (ConsumablesGrid.SelectedItem is Item consumableItem)
+            {
+                selectedItem = consumableItem;
+            }
+
+            if (selectedItem != null)
+            {
+                // Otevřeme formulář pro úpravu
                 ItemFormWindow form = new ItemFormWindow();
                 form.CurrentItem = selectedItem;
                 form.SetItemForEdit(selectedItem);
+
+                // Po zavření formuláře pro úpravu provedeme aktualizaci databáze
                 if (form.ShowDialog() == true)
                 {
-                    // Aktualizace položky v databázi
-                    Database.UpdateItemInDatabase(form.CurrentItem);
-                    RefreshDataGrid(); // Aktualizace zobrazené tabulky
-                }
-            }
-            else if (ConsumablesGrid.SelectedItem is Item selectedConsumableItem)
-            {
-                ItemFormWindow form = new ItemFormWindow();
-                form.CurrentItem = selectedConsumableItem;
-                form.SetItemForEdit(selectedConsumableItem);
-                if (form.ShowDialog() == true)
-                {
-                    // Aktualizace položky v databázi
+                    // Uložení aktualizované položky do databáze
                     Database.UpdateItemInDatabase(form.CurrentItem);
                     RefreshDataGrid(); // Aktualizace zobrazené tabulky
                 }
@@ -141,5 +147,11 @@ namespace Sklad
                 ConsumablesGrid.ItemsSource = consumablesList;
             }
         }
+
+        private void ChangeSpotrebak(object sender, SelectionChangedEventArgs e)
+        {
+            SparePartsGrid.SelectedItem = null;
+        }
+
     }
 }

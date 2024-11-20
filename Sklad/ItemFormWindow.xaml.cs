@@ -1,4 +1,5 @@
-﻿using Sklad.Models;
+﻿using Sklad.Data;
+using Sklad.Models;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -94,26 +95,19 @@ namespace Sklad
         {
             // Načteme podtypy na základě typu
             SubtypeComboBox.Items.Clear(); // Nezapomeňme vyprázdnit předchozí nabídku
-
+            List<Subtype> subtypes = new List<Subtype>();
             if (type == "ND")
             {
-                SubtypeComboBox.Items.Add("Trafo");
-                SubtypeComboBox.Items.Add("Návěstidlo");
-                SubtypeComboBox.Items.Add("Kabel");
-                SubtypeComboBox.Items.Add("Deska zdroje");
+                subtypes = Database.GetNdSubtypes();
             }
             else if (type == "Material")
             {
-                SubtypeComboBox.Items.Add("Žárovka");
-                SubtypeComboBox.Items.Add("Izolační materiál");
-                SubtypeComboBox.Items.Add("Kabel");
-                SubtypeComboBox.Items.Add("Koncovka");
+                subtypes = Database.GetMatSubtypes();
             }
-
-            // Zajistíme, že pokud je položka nová, bude k dispozici i nabídka podtypů
-            if (SubtypeComboBox.Items.Count > 0)
+            
+            foreach (var subtype in subtypes)
             {
-                SubtypeComboBox.SelectedIndex = 0; // Můžete nastavit výchozí hodnotu
+                SubtypeComboBox.Items.Add(subtype.Name);
             }
         }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sklad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1000">
+        Title="Sklad SZP LKKB" Height="600" Width="1000" MaxWidth="1980" MaxHeight="1024">
     <Grid Margin="0,0,0,-236">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -14,15 +14,16 @@
             <!-- Pro tlačítka -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="13*" />
+            <ColumnDefinition Width="87*"/>
+            <ColumnDefinition Width="100*" />
         </Grid.ColumnDefinitions>
 
         <!-- Text pro náhradní díly -->
-        <TextBlock Text="Náhradní díly" FontSize="16" FontWeight="Bold" Margin="10" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="Náhradní díly" FontSize="16" FontWeight="Bold" Margin="134,10,0,0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <!-- Tabulka pro náhradní díly -->
-        <DataGrid x:Name="SparePartsGrid" Grid.Column="0" Margin="10,50,10,10" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CanUserAddRows="False" CanUserDeleteRows="False">
+        <DataGrid x:Name="SparePartsGrid" Grid.Column="0" Margin="10,50,10,10" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" Grid.ColumnSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Název" Binding="{Binding Name}" Width="Auto">
                     <DataGridTextColumn.HeaderStyle>
@@ -103,10 +104,10 @@
         </DataGrid>
 
         <!-- Text pro spotřební materiál -->
-        <TextBlock Text="Spotřební materiál" FontSize="16" FontWeight="Bold" Margin="10" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock Text="Spotřební materiál" FontSize="16" FontWeight="Bold" Margin="0,10,0,0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top"/>
 
         <!-- Tabulka pro spotřební materiál -->
-        <DataGrid x:Name="ConsumablesGrid" Grid.Column="1" Margin="10,50,10,10" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CanUserAddRows="False" CanUserDeleteRows="False">
+        <DataGrid x:Name="ConsumablesGrid" Grid.Column="2" Margin="10,50,10,10" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False" SelectionChanged="ChangeSpotrebak">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Název" Binding="{Binding Name}" Width="Auto">
                     <DataGridTextColumn.HeaderStyle>
@@ -188,7 +189,7 @@
 
 
         <!-- Tlačítka pod tabulkami (umístěná v novém řádku) -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,10" Grid.Row="1" Grid.ColumnSpan="2">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="275,10,0,10" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1">
             <Button Content="Přidat položku" Width="150" Click="AddItemButton_Click" Margin="5"/>
             <Button Content="Upravit položku" Width="150" Margin="5" Click="EditItemButton_Click"/>
         </StackPanel>

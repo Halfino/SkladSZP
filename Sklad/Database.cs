@@ -109,5 +109,41 @@ namespace Sklad.Data
                 historyCommand.ExecuteNonQuery();
             }
         }
+
+        public static List<Subtype> GetNdSubtypes()
+        {
+            using (var connection = new SqliteConnection($"Data Source={DatabasePath}"))
+            {
+                connection.Open();
+                var command = new SqliteCommand("SELECT name FROM nd_subtypes", connection);
+                var reader = command.ExecuteReader();
+
+                var subtypes = new List<Subtype>();
+                while (reader.Read())
+                {
+                    subtypes.Add(new Subtype { Name = reader.GetString(0) });
+                }
+
+                return subtypes;
+            }
+        }
+
+        public static List<Subtype> GetMatSubtypes()
+        {
+            using (var connection = new SqliteConnection($"Data Source={DatabasePath}"))
+            {
+                connection.Open();
+                var command = new SqliteCommand("SELECT name FROM mat_subtypes", connection);
+                var reader = command.ExecuteReader();
+
+                var subtypes = new List<Subtype>();
+                while (reader.Read())
+                {
+                    subtypes.Add(new Subtype { Name = reader.GetString(0) });
+                }
+
+                return subtypes;
+            }
+        }
     }
 }
