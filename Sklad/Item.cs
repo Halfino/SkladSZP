@@ -15,5 +15,6 @@ namespace Sklad.Models
         public string Subtype { get; set; }
         public int Quantity { get; set; }
         public string Location { get; set; }
+        public int SubtypeId { get; set; }  // Odkaz na podtyp v tabulce Subtypes
     }
 }

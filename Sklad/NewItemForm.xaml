@@ -1,0 +1,53 @@
+﻿<Window x:Class="Sklad.NewItemForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sklad"
+        mc:Ignorable="d"
+        Title="NewItemForm" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Název -->
+        <TextBlock Text="Název:" Grid.Row="0" VerticalAlignment="Center"/>
+        <TextBox x:Name="NameTextBox" Grid.Row="0" Margin="100,0,0,5" Width="200"/>
+
+        <!-- Katalogové číslo -->
+        <TextBlock Text="Katalogové číslo:" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBox x:Name="CatalogNumberTextBox" Grid.Row="1" Margin="100,0,0,5" Width="200"/>
+
+        <!-- Typ -->
+        <TextBlock Text="Typ:" Grid.Row="2" VerticalAlignment="Center"/>
+        <ComboBox x:Name="TypeComboBox" Grid.Row="2" Margin="100,0,0,5" Width="200" SelectionChanged="TypeComboBox_SelectionChanged">
+            <ComboBoxItem Content="ND" />
+            <ComboBoxItem Content="Material" />
+        </ComboBox>
+
+        <!-- Podtyp -->
+        <TextBlock Text="Podtyp:" Grid.Row="3" VerticalAlignment="Center"/>
+        <ComboBox x:Name="SubtypeComboBox" Grid.Row="3" Margin="100,0,0,5" Width="200"/>
+
+        <!-- Počet -->
+        <TextBlock Text="Počet:" Grid.Row="4" VerticalAlignment="Center"/>
+        <TextBox x:Name="QuantityTextBox" Grid.Row="4" Margin="100,0,0,5" Width="200"/>
+
+        <!-- Umístění -->
+        <TextBlock Text="Umístění:" Grid.Row="5" VerticalAlignment="Center"/>
+        <TextBox x:Name="LocationTextBox" Grid.Row="5" Margin="100,0,0,5" Width="200"/>
+
+        <!-- Tlačítka -->
+        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Button Content="Uložit" Width="100" Margin="5" Click="SaveButton_Click"/>
+            <Button Content="Zrušit" Width="100" Margin="5" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
