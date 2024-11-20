@@ -192,6 +192,7 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="275,10,0,10" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1">
             <Button Content="Přidat položku" Width="150" Click="AddItemButton_Click" Margin="5"/>
             <Button Content="Upravit položku" Width="150" Margin="5" Click="EditItemButton_Click"/>
+            <Button Content="Historie položky" Width="150" Margin="5" Click="ShowHistoryButton_Click"/>
         </StackPanel>
 
     </Grid>

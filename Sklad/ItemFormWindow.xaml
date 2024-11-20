@@ -15,6 +15,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- Název -->
@@ -44,8 +45,12 @@
         <TextBlock Text="Umístění:" Grid.Row="5" VerticalAlignment="Center"/>
         <TextBox x:Name="LocationTextBox" Grid.Row="5" Margin="100,0,0,5" Width="200"/>
 
+        <!-- Umístění -->
+        <TextBlock Text="Důvod změny:" Grid.Row="6" VerticalAlignment="Center"/>
+        <TextBox x:Name="CommentTextBox" Grid.Row="6" Margin="100,0,0,5" Width="200"/>
+        
         <!-- Tlačítka -->
-        <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+        <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
             <Button Content="Uložit" Width="100" Margin="5" Click="SaveButton_Click"/>
             <Button Content="Zrušit" Width="100" Margin="5" Click="CancelButton_Click"/>
         </StackPanel>

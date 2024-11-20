@@ -10,11 +10,13 @@ namespace Sklad
     /// </summary>
     public partial class ItemFormWindow : Window
     {
-        public ItemFormWindow()
+        public ItemFormWindow(User user)
         {
             InitializeComponent();
+            LoggedInUser = user;
         }
 
+        public User LoggedInUser { get; private set; }
         public Item CurrentItem { get; set; } // Pro úpravu záznamu
 
         private void TypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -30,6 +32,12 @@ namespace Sklad
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(CommentTextBox.Text))  // Zkontrolujeme, jestli je Comment prázdné
+            {
+                MessageBox.Show("Komentář nesmí být prázdný.", "Chyba", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; // Zastavíme další provádění metody, pokud je komentář prázdný
+            }
+
             if (CurrentItem == null)
                 CurrentItem = new Item();
 
@@ -40,6 +48,8 @@ namespace Sklad
             CurrentItem.Subtype = SubtypeComboBox.SelectedItem?.ToString();
             CurrentItem.Quantity = int.TryParse(QuantityTextBox.Text, out int quantity) ? quantity : 0;
             CurrentItem.Location = LocationTextBox.Text;
+            CurrentItem.Comment = CommentTextBox.Text;
+            CurrentItem.Modified_by = LoggedInUser.Name;
 
             // Logika pro přidání/úpravu položky zde
             // Např. zavolání metody UpdateItem nebo InsertItem

@@ -14,11 +14,13 @@ namespace Sklad
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(User user)
         {
             InitializeComponent();
             LoadItems();
+            LoggedInUser = user;
         }
+        public User LoggedInUser { get; set; }
 
         private void LoadItems()
         {
@@ -84,7 +86,7 @@ namespace Sklad
             if (selectedItem != null)
             {
                 // Otevřeme formulář pro úpravu
-                ItemFormWindow form = new ItemFormWindow();
+                ItemFormWindow form = new ItemFormWindow(LoggedInUser);
                 form.CurrentItem = selectedItem;
                 form.SetItemForEdit(selectedItem);
 
@@ -93,6 +95,7 @@ namespace Sklad
                 {
                     // Uložení aktualizované položky do databáze
                     Database.UpdateItemInDatabase(form.CurrentItem);
+                    Database.SaveItemHistory(form.CurrentItem);
                     RefreshDataGrid(); // Aktualizace zobrazené tabulky
                 }
             }
@@ -153,5 +156,32 @@ namespace Sklad
             SparePartsGrid.SelectedItem = null;
         }
 
+        private void ShowHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            Item selectedItem = null;
+
+            // Zkontrolujeme, zda je vybraná položka v SparePartsGrid (levý grid - ND)
+            if (SparePartsGrid.SelectedItem is Item sparePartItem)
+            {
+                selectedItem = sparePartItem;
+            }
+            // Zkontrolujeme, zda je vybraná položka v ConsumablesGrid (pravý grid - Material)
+            else if (ConsumablesGrid.SelectedItem is Item consumableItem)
+            {
+                selectedItem = consumableItem;
+            }
+
+            if (selectedItem != null)
+            {
+                // Otevřeme formulář pro úpravu
+                ItemHistory history = new ItemHistory(selectedItem.Id, selectedItem);
+                history.Show();
+            }
+            else
+            {
+                MessageBox.Show("Vyberte položku k zobrazeni historie.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
     }
 }
