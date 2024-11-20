@@ -1,6 +1,7 @@
 ﻿using Sklad.Data;
 using Sklad.Models;
 using System.Windows;
+using System.Windows.Input;
 
 
 namespace Sklad
@@ -75,6 +76,14 @@ namespace Sklad
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void LocationDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SaveButton_Click(sender, e); // Vyvolání kliknutí na tlačítko při stisknutí Enter
+            }
         }
     }
 }

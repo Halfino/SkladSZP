@@ -2,6 +2,7 @@
 using Sklad.Models;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Sklad
 {
@@ -121,5 +122,12 @@ namespace Sklad
             }
         }
 
+        private void CommentDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SaveButton_Click(sender, e); // Vyvolání kliknutí na tlačítko při stisknutí Enter
+            }
+        }
     }
 }

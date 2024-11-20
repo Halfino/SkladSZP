@@ -42,7 +42,7 @@
 
         <!-- Umístění -->
         <TextBlock Text="Umístění:" Grid.Row="5" VerticalAlignment="Center"/>
-        <TextBox x:Name="LocationTextBox" Grid.Row="5" Margin="100,0,0,5" Width="200"/>
+        <TextBox x:Name="LocationTextBox" Grid.Row="5" Margin="100,0,0,5" Width="200" KeyDown="LocationDown"/>
 
         <!-- Tlačítka -->
         <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">

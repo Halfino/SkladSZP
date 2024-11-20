@@ -47,7 +47,7 @@
 
         <!-- Umístění -->
         <TextBlock Text="Důvod změny:" Grid.Row="6" VerticalAlignment="Center"/>
-        <TextBox x:Name="CommentTextBox" Grid.Row="6" Margin="100,0,0,5" Width="200"/>
+        <TextBox x:Name="CommentTextBox" Grid.Row="6" Margin="100,0,0,5" Width="200" KeyDown="CommentDown"/>
         
         <!-- Tlačítka -->
         <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
