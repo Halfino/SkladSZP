@@ -105,6 +105,45 @@ namespace Sklad
             }
         }
 
+        private void ChangeSpotrebak(object sender, SelectionChangedEventArgs e)
+        {
+            SparePartsGrid.SelectedItem = null;
+        }
+
+        private void ChangeDil(object sender, SelectionChangedEventArgs e)
+        { ConsumablesGrid.SelectedItem = null; }
+
+        private void ShowHistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            Item selectedItem = null;
+
+            // Zkontrolujeme, zda je vybraná položka v SparePartsGrid (levý grid - ND)
+            if (SparePartsGrid.SelectedItem is Item sparePartItem)
+            {
+                selectedItem = sparePartItem;
+            }
+            // Zkontrolujeme, zda je vybraná položka v ConsumablesGrid (pravý grid - Material)
+            else if (ConsumablesGrid.SelectedItem is Item consumableItem)
+            {
+                selectedItem = consumableItem;
+            }
+
+            if (selectedItem != null)
+            {
+                // Otevřeme formulář pro úpravu
+                ItemHistory history = new ItemHistory(selectedItem.Id, selectedItem);
+                SparePartsGrid.SelectedItem = null;
+                ConsumablesGrid.SelectedItem = null;
+                history.Show();
+
+            }
+            else
+            {
+                MessageBox.Show("Vyberte položku k zobrazeni historie.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
         private void RefreshDataGrid()
         {
             using (var connection = new SqliteConnection($"Data Source={Database.DatabasePath}"))
@@ -151,37 +190,14 @@ namespace Sklad
             }
         }
 
-        private void ChangeSpotrebak(object sender, SelectionChangedEventArgs e)
+        private void ChangeMouseDil(object sender, MouseButtonEventArgs e)
         {
-            SparePartsGrid.SelectedItem = null;
+            ConsumablesGrid.SelectedItem = null;
         }
 
-        private void ShowHistoryButton_Click(object sender, RoutedEventArgs e)
+        private void ChangeMouseSpotrebak(object sender, MouseButtonEventArgs e)
         {
-
-            Item selectedItem = null;
-
-            // Zkontrolujeme, zda je vybraná položka v SparePartsGrid (levý grid - ND)
-            if (SparePartsGrid.SelectedItem is Item sparePartItem)
-            {
-                selectedItem = sparePartItem;
-            }
-            // Zkontrolujeme, zda je vybraná položka v ConsumablesGrid (pravý grid - Material)
-            else if (ConsumablesGrid.SelectedItem is Item consumableItem)
-            {
-                selectedItem = consumableItem;
-            }
-
-            if (selectedItem != null)
-            {
-                // Otevřeme formulář pro úpravu
-                ItemHistory history = new ItemHistory(selectedItem.Id, selectedItem);
-                history.Show();
-            }
-            else
-            {
-                MessageBox.Show("Vyberte položku k zobrazeni historie.", "Upozornění", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
+            SparePartsGrid.SelectedItem = null;
         }
     }
 }
