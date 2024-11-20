@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sklad"
         mc:Ignorable="d"
-        Title="Sklad SZP LKKB" Height="600" Width="1000" MaxWidth="1980" MaxHeight="1024">
+        Title="Sklad SZP LKKB" Height="768" Width="1024" MaxWidth="1980" MaxHeight="1024">
     <Grid Margin="0,0,0,-236">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" MaxHeight="600"/>
             <!-- Pro tabulky -->
             <RowDefinition Height="Auto" />
             <!-- Pro tlačítka -->
