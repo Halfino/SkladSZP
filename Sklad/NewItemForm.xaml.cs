@@ -67,6 +67,8 @@ namespace Sklad
                     CurrentItem.Subtype = SubtypeComboBox.SelectedItem?.ToString();
                     CurrentItem.Quantity = int.TryParse(QuantityTextBox.Text, out int quantity) ? quantity : 0;
                     CurrentItem.Location = LocationTextBox.Text;
+                    CurrentItem.material_unit = MaterialUnitTextBox.Text;
+                    CurrentItem.serial_number = SerialNumberTextBox.Text;
                 };
 
                 // Přidání nového záznamu do kolekce nebo databáze

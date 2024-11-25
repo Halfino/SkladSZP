@@ -51,6 +51,8 @@ namespace Sklad
             CurrentItem.Location = LocationTextBox.Text;
             CurrentItem.Comment = CommentTextBox.Text;
             CurrentItem.Modified_by = LoggedInUser.Name;
+            CurrentItem.material_unit = MaterialUnitTextBox.Text;
+            CurrentItem.serial_number = SerialNumberTextBox.Text;
 
             // Logika pro přidání/úpravu položky zde
             // Např. zavolání metody UpdateItem nebo InsertItem
@@ -73,7 +75,8 @@ namespace Sklad
             CatalogNumberTextBox.Text = item.CatalogNumber;
             QuantityTextBox.Text = item.Quantity.ToString();
             LocationTextBox.Text = item.Location;
-
+            MaterialUnitTextBox.Text = item.material_unit;
+            SerialNumberTextBox.Text = item.serial_number;
             // Nastavení ComboBoxu pro typ (ND nebo Material)
             TypeComboBox.Items.Clear();  // Ujistíme se, že nebudou duplikáty v ComboBoxu
             TypeComboBox.Items.Add("ND");

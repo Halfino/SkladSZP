@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Reflection.PortableExecutable;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -30,7 +31,7 @@ namespace Sklad
             {
                 connection.Open();
                 string query = @"
-            SELECT id, name, catalog_number, type, subtype, quantity, location
+            SELECT id, name, catalog_number, type, subtype, quantity, location, material_unit, serial_number
             FROM Items";
 
                 using (var command = new SqliteCommand(query, connection))
@@ -46,7 +47,9 @@ namespace Sklad
                             Type = reader.GetString(3),
                             Subtype = reader.GetString(4), // Načítání Subtype jako string přímo z tabulky Items
                             Quantity = reader.GetInt32(5),
-                            Location = reader.GetString(6)
+                            Location = reader.GetString(6),
+                            material_unit = reader.GetString(7),
+                            serial_number = reader.GetString(8)
                         });
                     }
                 }
@@ -165,6 +168,8 @@ namespace Sklad
                         Subtype = sparePartsReader.GetString(4),
                         Quantity = sparePartsReader.GetInt32(5),
                         Location = sparePartsReader.GetString(6),
+                        material_unit = sparePartsReader.IsDBNull(9) ? null : sparePartsReader.GetString(9),
+                        serial_number = sparePartsReader.IsDBNull(10) ? null : sparePartsReader.GetString(10)
                     });
                 }
                 SparePartsGrid.ItemsSource = sparePartsList;
@@ -184,6 +189,8 @@ namespace Sklad
                         Subtype = consumablesReader.GetString(4),
                         Quantity = consumablesReader.GetInt32(5),
                         Location = consumablesReader.GetString(6),
+                        material_unit = consumablesReader.GetString(9),
+                        serial_number = consumablesReader.GetString(10)
                     });
                 }
                 ConsumablesGrid.ItemsSource = consumablesList;

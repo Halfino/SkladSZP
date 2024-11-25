@@ -18,6 +18,8 @@ namespace Sklad.Models
         public string Comment {  get; set; }
         public string Modified_by {  get; set; }
         public string Modified_at {  get; set; }
+        public string material_unit { get; set; }
+        public string serial_number { get; set; }
         public int SubtypeId { get; set; }  // Odkaz na podtyp v tabulce Subtypes
     }
 }

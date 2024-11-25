@@ -36,7 +36,9 @@ namespace Sklad.Data
                         quantity INTEGER NOT NULL DEFAULT 0,
                         location TEXT, 
 	                    last_modified_by TEXT,
-	                    last_modified_at TIMESTAMP
+	                    last_modified_at TIMESTAMP, 
+                        material_unit TEXT,
+                        serial_number TEXT
                     )";
                     using (var command = new SqliteCommand(createItemsTableCmd, connection))
                     {
@@ -109,13 +111,15 @@ namespace Sklad.Data
             using (var connection = new SqliteConnection($"Data Source={DatabasePath}"))
             {
                 connection.Open();
-                var command = new SqliteCommand("INSERT INTO Items (Name, catalog_number, Type, Subtype, Quantity, Location) VALUES (@Name, @catalog_number, @Type, @Subtype, @Quantity, @Location)", connection);
+                var command = new SqliteCommand("INSERT INTO Items (Name, catalog_number, Type, Subtype, Quantity, Location, material_unit, serial_number) VALUES (@Name, @catalog_number, @Type, @Subtype, @Quantity, @Location, @Material_unit, @Serial_number)", connection);
                 command.Parameters.AddWithValue("@Name", item.Name);
                 command.Parameters.AddWithValue("@catalog_number", item.CatalogNumber);
                 command.Parameters.AddWithValue("@Type", item.Type);
                 command.Parameters.AddWithValue("@Subtype", item.Subtype);
                 command.Parameters.AddWithValue("@Quantity", item.Quantity);
                 command.Parameters.AddWithValue("@Location", item.Location);
+                command.Parameters.AddWithValue("@Material_unit", item.material_unit);
+                command.Parameters.AddWithValue("@Serial_number", item.serial_number);
                 command.ExecuteNonQuery();
 
                 // Získání ID právě přidané položky
@@ -137,12 +141,14 @@ namespace Sklad.Data
             using (var connection = new SqliteConnection($"Data Source={DatabasePath}"))
             {
                 connection.Open();
-                var command = new SqliteCommand("UPDATE Items SET Name = @Name, catalog_number = @catalog_number, Quantity = @Quantity, Location = @Location WHERE Id = @Id", connection);
+                var command = new SqliteCommand("UPDATE Items SET Name = @Name, catalog_number = @catalog_number, Quantity = @Quantity, Location = @Location, material_unit = @Material_unit, serial_number = @Serial_number WHERE Id = @Id", connection);
                 command.Parameters.AddWithValue("@Name", item.Name);
                 command.Parameters.AddWithValue("@catalog_number", item.CatalogNumber);
                 command.Parameters.AddWithValue("@Quantity", item.Quantity);
                 command.Parameters.AddWithValue("@Location", item.Location);
                 command.Parameters.AddWithValue("@Id", item.Id);
+                command.Parameters.AddWithValue("@Material_unit", item.material_unit);
+                command.Parameters.AddWithValue("@Serial_number", item.serial_number);
                 command.ExecuteNonQuery();
 
                 // Zapsání změny do historie
