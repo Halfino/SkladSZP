@@ -254,6 +254,51 @@ namespace Sklad.Data
             }
         }
 
+        public static (List<Item> SpareParts, List<Item> Consumables) GetDataForPrint()
+        {
+            var spareParts = new List<Item>();
+            var consumables = new List<Item>();
+
+            using (var connection = new SqliteConnection($"Data Source={DatabasePath}"))
+            {
+                connection.Open();
+                var sparePartsCommand = new SqliteCommand("SELECT * FROM Items WHERE Type = 'ND'", connection);
+                var consumablesCommand = new SqliteCommand("SELECT * FROM Items Where Type = 'Material'", connection);
+;                using (var reader = sparePartsCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        spareParts.Add(new Item
+                        {
+                            Name = reader.GetString(1),
+                            CatalogNumber = reader.GetString(2),
+                            Quantity = reader.GetInt32(5),
+                            Location = reader.GetString(6),
+                            material_unit = reader.GetString(9),
+                            serial_number = reader.GetString(10)
+                        });
+                    }
+                }
+
+                using (var reader = consumablesCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        consumables.Add(new Item
+                        {
+                            Name = reader.GetString(1),
+                            CatalogNumber = reader.GetString(2),
+                            Quantity = reader.GetInt32(5),
+                            Location = reader.GetString(6),
+                            material_unit = reader.GetString(9),
+                            serial_number = reader.GetString(10)
+                        });
+                    }
+                }
+            }
+            return (spareParts, consumables);
+        }
+
         private static void seedDB()
         {
             List<String> ndTypes = new List<String>();

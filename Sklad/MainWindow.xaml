@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sklad"
         mc:Ignorable="d"
-        Title="Sklad SZP LKKB" Height="768" Width="1024" MaxWidth="1980" MaxHeight="1024" Background="#FFA7A7A7">
+        
+        Title="Sklad SZP LKKB" Height="800" Width="1200" MaxWidth="1980" MaxHeight="1024" Background="#FFBDB9B9">
     <Grid Margin="0,0,0,-236">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MaxHeight="600"/>
             <!-- Pro tabulky -->
             <RowDefinition Height="Auto" />
             <!-- Pro tlačítka -->
+            <RowDefinition Height="Auto" />
+            <!-- Pro tlačítko admin -->
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
@@ -266,6 +269,24 @@
                 </Button.Resources>
             </Button>
             <Button Content="Historie položky" Width="150" Margin="5" Click="ShowHistoryButton_Click" FontWeight="Bold" FontSize="14">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
+        <!-- Tlačítka pod tabulkami (umístěná v novém řádku) -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="285,10,0,10" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="2">
+            <Button Content="Přidat nový typ" Width="150" Click="AddTypeButton_Click" Margin="5" FontWeight="Bold" FontSize="14">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Content="Tisk Skladu" Width="150" Margin="5" FontWeight="Bold" FontSize="14" Click="PrintStorage_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>

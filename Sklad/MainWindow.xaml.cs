@@ -147,6 +147,29 @@ namespace Sklad
             }
         }
 
+        private void AddTypeButton_Click(Object sender, RoutedEventArgs e)
+        {
+            var addSubtypeWindow = new AddSubtypeWindow();
+            if (addSubtypeWindow.ShowDialog() == true)
+            {
+                string newSubtype = addSubtypeWindow.SubtypeName;
+                string selectedType = addSubtypeWindow.SelectedType;
+
+                // Určete správnou tabulku na základě typu
+                string targetTable = selectedType == "ND" ? "nd_subtypes" : "mat_subtypes";
+
+                using (var connection = new SqliteConnection($"Data Source={Database.DatabasePath}"))
+                {
+                    connection.Open();
+                    var command = new SqliteCommand($"INSERT INTO {targetTable} (Name) VALUES (@Name)", connection);
+                    command.Parameters.AddWithValue("@Name", newSubtype);
+                    command.ExecuteNonQuery();
+                }
+
+                MessageBox.Show($"Podtyp '{newSubtype}' byl úspěšně přidán do tabulky '{targetTable}'.", "Úspěch", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
         private void RefreshDataGrid()
         {
             using (var connection = new SqliteConnection($"Data Source={Database.DatabasePath}"))
@@ -205,6 +228,11 @@ namespace Sklad
         private void ChangeMouseSpotrebak(object sender, MouseButtonEventArgs e)
         {
             SparePartsGrid.SelectedItem = null;
+        }
+
+        private void PrintStorage_Click(object sender, RoutedEventArgs e)
+        {
+            PdfCreator.GeneratePdf();
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sklad"
         mc:Ignorable="d"
-        Title="Upravit položku" Height="450" Width="800">
+        Title="Upravit položku" Height="350" Width="360">
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,42 +21,42 @@
         </Grid.RowDefinitions>
 
         <!-- Název -->
-        <TextBlock Text="Název:" Grid.Row="0" VerticalAlignment="Center"/>
+        <TextBlock Text="Název:" Grid.Row="0" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="NameTextBox" Grid.Row="0" Margin="100,0,0,5" Width="200"/>
 
         <!-- Katalogové číslo -->
-        <TextBlock Text="Katalogové číslo:" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBlock Text="Katalogové číslo:" Grid.Row="1" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="CatalogNumberTextBox" Grid.Row="1" Margin="100,0,0,5" Width="200"/>
 
         <!-- Typ -->
-        <TextBlock Text="Typ:" Grid.Row="2" VerticalAlignment="Center"/>
+        <TextBlock Text="Druh:" Grid.Row="2" VerticalAlignment="Center" FontWeight="Bold"/>
         <ComboBox x:Name="TypeComboBox" Grid.Row="2" Margin="100,0,0,5" Width="200" SelectionChanged="TypeComboBox_SelectionChanged">
             <ComboBoxItem Content="ND" />
             <ComboBoxItem Content="Material" />
         </ComboBox>
 
         <!-- Podtyp -->
-        <TextBlock Text="Podtyp:" Grid.Row="3" VerticalAlignment="Center"/>
+        <TextBlock Text="Typ:" Grid.Row="3" VerticalAlignment="Center" FontWeight="Bold"/>
         <ComboBox x:Name="SubtypeComboBox" Grid.Row="3" Margin="100,0,0,5" Width="200"/>
 
         <!-- Počet -->
-        <TextBlock Text="Počet:" Grid.Row="4" VerticalAlignment="Center"/>
+        <TextBlock Text="Počet:" Grid.Row="4" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="QuantityTextBox" Grid.Row="4" Margin="100,0,0,5" Width="200"/>
 
         <!-- Umístění -->
-        <TextBlock Text="Umístění:" Grid.Row="5" VerticalAlignment="Center"/>
+        <TextBlock Text="Umístění:" Grid.Row="5" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="LocationTextBox" Grid.Row="5" Margin="100,0,0,5" Width="200"/>
 
         <!-- Umístění -->
-        <TextBlock Text="Důvod změny:" Grid.Row="6" VerticalAlignment="Center"/>
+        <TextBlock Text="Důvod změny:" Grid.Row="6" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="CommentTextBox" Grid.Row="6" Margin="100,0,0,5" Width="200" KeyDown="CommentDown"/>
 
         <!-- Sklad MU -->
-        <TextBlock Text="Sklad MU:" Grid.Row="7" VerticalAlignment="Center"/>
+        <TextBlock Text="Sklad MU:" Grid.Row="7" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="MaterialUnitTextBox" Grid.Row="7" Margin="100,0,0,5" Width="200" />
 
         <!-- Seriové číslo -->
-        <TextBlock Text="Seriové číslo:" Grid.Row="8" VerticalAlignment="Center"/>
+        <TextBlock Text="Výrobní číslo:" Grid.Row="8" VerticalAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="SerialNumberTextBox" Grid.Row="8" Margin="100,0,0,5" Width="200"/>
 
         <!-- Tlačítka -->
